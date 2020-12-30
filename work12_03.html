@@ -25,25 +25,28 @@
   </ul>
   <button type="button" id="_answer_1" onclick="Answer_Check(1)">回答1</button>
   <button type="button" id="_answer_2" onclick="Answer_Check(2)">回答2</button>
+  
+  <!--リセットボタン-->
+  <button type="button" id="_reset" onclick="Q_Reset()">クイズの復習！</button>
 </div>
 
 <script type="text/javascript">
   // 初期画面起動時
   var Question = [
       [
-        "1が正解の問題？",
+        "Q1.1が正解の問題？",
         "1. こっちを押すと正解",
         "2. 不正解です",
         "1"
       ],
       [
-        "2が正解の問題？",
+        "Q2.2が正解の問題？",
         "1. 不正解です",
         "2. こっちを押すと正解",
         "2"
       ],
       [
-        "1が正解の問題？",
+        "Q3.1が正解の問題？",
         "1. こっちを押すと正解",
         "2. 不正解です",
         "1"
@@ -56,7 +59,8 @@
   // 問題を表示するオブジェクトを取得する
   var A1 = document.getElementById('_ans1');
   var A2 = document.getElementById('_ans2');
-   
+  // リセットボタンの操作 初期設定は非表示
+  document.getElementById("_reset").style.display ="none";
   
   // 正解数を保持する値
   var Correct = 0;
@@ -83,14 +87,25 @@
       alert("不正解");
     }
     Qcnt++;
-    if (Qcnt == Question.length) {
+    if (Qcnt == Question.length) { // 最終問題の処理
       Q.textContent = "問題は以上です。正解数は" + Correct + "でした。";
       A1.textContent = "";
-      A2.textContent = ""
+      A2.textContent = "";
+      document.getElementById("_reset").style.display ="block";
     } else {
       Q_Set();
     }
   }
+
+  // クイズのリセット処理
+  function Q_Reset() {
+    Qcnt = 0;
+    Correct = 0;
+    Q_Set();
+    // リセットボタンの操作 初期設定は非表示
+    document.getElementById("_reset").style.display ="none";
+  };
+
   </script>
 
   </body>
