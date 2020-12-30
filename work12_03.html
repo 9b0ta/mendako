@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="work12.css">
+  <script src="anime.min.js"></script>
   <title>メンダコの世界</title>
 </head>
 <body>
@@ -23,8 +24,10 @@
   <li id="_ans1">回答１</li>
   <li id="_ans2">回答２</li>
   </ul>
-  <button type="button" id="_answer_1" onclick="Answer_Check(1)">回答1</button>
-  <button type="button" id="_answer_2" onclick="Answer_Check(2)">回答2</button>
+  <div class="button">
+    <button type="button" id="_answer_1" onclick="Answer_Check(1)">回答1</button>
+    <button type="button" id="_answer_2" onclick="Answer_Check(2)">回答2</button>
+  </div>
   
   <!--リセットボタン-->
   <button type="button" id="_reset" onclick="Q_Reset()">クイズの復習！</button>
@@ -105,6 +108,39 @@
     // リセットボタンの操作 初期設定は非表示
     document.getElementById("_reset").style.display ="none";
   };
+
+
+  // animationの追加
+  // https://codepen.io/alexchantastic/pen/XgXbgz  の実装の真似
+  var buttonEl = document.querySelectorAll('button');
+
+  function animateButton(el, scale, duration, elasticity) {
+    anime.remove(el);
+    anime({
+      targets: el,
+      scale: scale,
+      duration: duration,
+      elasticity: elasticity
+    });
+  }
+
+  function enterButton(el) {
+    animateButton(el, 1.2, 800, 400)
+  };
+
+  function leaveButton(el) {
+    animateButton(el, 1.0, 600, 300)
+  };
+
+  for (var i = 0; i < buttonEl.length; i++) {
+    buttonEl[i].addEventListener('mouseenter', function(e) {
+      enterButton(e.target);
+    }, false);
+  
+    buttonEl[i].addEventListener('mouseleave', function(e) {
+      leaveButton(e.target)
+    }, false);  
+  }
 
   </script>
 
